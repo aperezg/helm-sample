@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "http-helm-workshop.fullname" . }}
+  labels:
+    {{- include "http-helm-workshop.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+      protocol: TCP
+  selector:
+    {{- include "http-helm-workshop.selectorLabels" . | nindent 4 }}
