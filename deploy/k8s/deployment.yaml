@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: helm-workshop
+  name: helm-workshop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: helm-workshop
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: helm-workshop
+    spec:
+      containers:
+        - image: example.com/helm-workshop/api-demo
+          name: api-demo
+          ports:
+            - containerPort: 8080

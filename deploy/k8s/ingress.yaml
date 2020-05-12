@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx-0-24
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+  name: http-helm-workshop
+spec:
+  rules:
+    - host: sample.helm-workshop.example.com
+      http:
+        paths:
+          - backend:
+              serviceName: helm-workshop
+              servicePort: 8080
+            path: /hello
+  tls:
+    - hosts:
+        - sample.helm-workshop.example.com
+      secretName: tls-helm-workshop
